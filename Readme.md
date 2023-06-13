@@ -18,7 +18,7 @@ n = 10
 
 ## As funções
 
-Determinada a ordem do sistema, é possivel que a matriz dos coeficientes seja tridiagonal ou pentadiagonal. Para o primeiro caso, as funções **algoritmoThomas** e **sorTri** solucionam o sistema. Para matriz pentadiagonal, a solução é obtida através das funções **resolve** e **sorPenta**.
+Determinada a ordem do sistema, é possivel que a matriz dos coeficientes seja tridiagonal ou pentadiagonal. Para o primeiro caso, as funções `algoritmoThomas` e `sorTri` solucionam o sistema. Para matriz pentadiagonal, a solução é obtida através das funções `resolve` e `sorPenta`.
 
 ## Executando as funções
 
@@ -26,28 +26,28 @@ Para executar as funções, basta descomentá-las na main e preencher os parâme
 
 **algoritmoThomas(n)**
 parâmetros: 
-    n - Ordem do sistema 
+    - n - Ordem do sistema 
 
 **algoritmoTri(n, tol = TOL1, w = 1.1)**
 parâmetros: 
-    n - Ordem do sistema 
-    tol - Tolerância usada como critério de parada *(opcional)*
+    - n - Ordem do sistema 
+    - tol - Tolerância usada como critério de parada *(opcional)*
         Padrão: tol = 0
-    w - Fator de relaxação *(opcional)*
+    - w - Fator de relaxação *(opcional)*
         Padrão: w = 0
 
 **resolve(n, q = 5)**    
 parâmetros: 
-    n - Ordem do sistema      
-    q - Distância entra as diagonais principal e flutuante *(opcional)*
+    - n - Ordem do sistema      
+    - q - Distância entra as diagonais principal e flutuante *(opcional)*
         Padrão: q = 3                     
 
 **algoritmoPenta(n, q = 5, tol = TOL1, w = 1.1)** 
 parâmetros: 
-    n - Ordem do sistema 
-    q - Distância entra as diagonais principal e flutuante *(opcional)*
+    - n - Ordem do sistema 
+    - q - Distância entra as diagonais principal e flutuante *(opcional)*
         Padrão: q = 3
-    tol - Tolerância usada como critério de parada *(opcional)*
+    - tol - Tolerância usada como critério de parada *(opcional)*
         Padrão: tol = 0
-    w - Fator de relaxação *(opcional)*
+    - w - Fator de relaxação *(opcional)*
         Padrão: w = 0

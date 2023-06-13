@@ -2,26 +2,28 @@ import numpy as np
 import math
 import time
 
-TOL1 = 10**-3 
+TOL1 = 10**-3       #Tolerâncias usadas como critério de parada no método SOR
 TOL2 = 10**-7
 
-k = 10      #Número de iterações
-p = 5       #Número de operações adicionais
+K = 10      #Número de iterações
+P = 5       #Número de iterações adicionais
 
-np.set_printoptions(precision=4, floatmode = 'fixed')
+np.set_printoptions(precision=4, floatmode = 'fixed')   #Configura precisão de 4 dígitos decimais na impressão dos vetores e matrizes
 
 def iniciaSistemaTridiagonal(n):
-    matriz_BT = np.zeros((n,3))             #definindo matriz_BT
+    '''Inicia e retorna a matriz com as diagonais não nulas da matriz A (matriz BT), vetor b e vetor x (iniciado com os mesmos valores do vetor b).'''
+    matriz_BT = np.zeros((n,3))             
     for i in range(n):
         if i != 0: 
             matriz_BT[i,0] = -1 
             matriz_BT[i-1,2] = -2
         matriz_BT[i,1] = 8
-    vetor_b = matriz_BT.sum(axis = 1)       #definindo vetor_b
-    vetor_x = np.copy(vetor_b)              #definindo vetor_x 
+    vetor_b = matriz_BT.sum(axis = 1)
+    vetor_x = np.copy(vetor_b)              
     return matriz_BT, vetor_b, vetor_x
 
 def iniciaSistemaPentadiagonal(n, q):
+    '''Inicia e retorna a matriz com as diagonais não nulas da matriz A (matriz BP), vetor b e vetor x (iniciado com os mesmos valores do vetor b).'''
     matriz_BP = np.zeros((n,5))
     for i in range(n):
         if i != 0: 
@@ -36,6 +38,7 @@ def iniciaSistemaPentadiagonal(n, q):
     return matriz_BP, vetor_b, vetor_x
 
 def matrizA(n,q):
+    '''Inicia e retorna a matriz A pentadiagonal dos coeficientes do sistema.'''
     matriz_A = np.zeros((n,n))
     for i in range(n):
         if i != 0: 
@@ -48,6 +51,9 @@ def matrizA(n,q):
     return matriz_A
 
 def thomas(matriz_BT, vetor_b, vetor_x, n):
+    '''
+    Algoritmo de Thomas. Preenche o vetor_x com a solução do sistema.
+    '''
     a = matriz_BT.T[0]
     b = matriz_BT.T[1]
     c = matriz_BT.T[2]
@@ -74,6 +80,11 @@ def algoritmoThomas(n):
     print("Algoritmo de Thomas: ","%.4f" % ((tempo_final - tempo_inicial)*10**3), "ms") 
 
 def sorTri(matriz_BT, vetor_b, matriz_x, n, iteracoes, tolerancia = 0, w = 1):
+    '''
+    Método iterativo SOR para matriz tridiagonal. Modifica a matriz_x que consiste em dois vetores: 
+    matriz_x[0] - vetor x da iteração mais recente (x^(k+1));
+    metriz_x[1] - vetor x da última iteração (x^(k)).
+    '''
     for j in range(iteracoes):
         matriz_x[1] = np.copy(matriz_x[0]) 
         for i in range(n):
@@ -86,20 +97,24 @@ def sorTri(matriz_BT, vetor_b, matriz_x, n, iteracoes, tolerancia = 0, w = 1):
             break
 
 def algoritmoTri(n, tol = 0, w = 0):
-    matriz_x = np.zeros((2,n))             #definindo vetor_x
+    '''
+    Algoritmo responsável por coordenar a execução do método SOR para matriz tridiagonal. 
+    Imprime o vetor solução no terminal e o tempo gasto na execução do método SOR.
+    '''
+    matriz_x = np.zeros((2,n))             
     matriz_BT, vetor_b, matriz_x[0] = iniciaSistemaTridiagonal(n)
 
-    if w == 0:
-        sorTri(matriz_BT,vetor_b, matriz_x, n, k)   #k iterações com w = 1
+    if w == 0:      #Se w não foi especificado calcula w ótimo, executando o "algoritmo 01"
+        sorTri(matriz_BT,vetor_b, matriz_x, n, K)   
         e_k = max(abs((matriz_x[0]-matriz_x[1])))
 
-        sorTri(matriz_BT,vetor_b, matriz_x, n, p)   #p iterações com w = 1
+        sorTri(matriz_BT,vetor_b, matriz_x, n, P)   
         e_kp = max(abs((matriz_x[0]-matriz_x[1])))
 
-        w = 2/(1+math.sqrt(1-((e_kp/e_k)**(1/p))))
+        w = 2/(1+math.sqrt(1-((e_kp/e_k)**(1/P))))
 
     tempo_inicial = time.time()
-    sorTri(matriz_BT, vetor_b, matriz_x, n, k, tol, w)    #SOR
+    sorTri(matriz_BT, vetor_b, matriz_x, n, K, tol, w) 
     tempo_final = time.time()
     
     print(matriz_x[0])
@@ -107,6 +122,11 @@ def algoritmoTri(n, tol = 0, w = 0):
     print("w =", w)
 
 def sorPenta(matriz_BP, vetor_b, matriz_x, n, q, iteracoes, tolerancia = 0, w = 1):
+    '''
+    Método iterativo SOR para matriz pentadiagonal. Modifica a matriz_x que consiste em dois vetores: 
+    matriz_x[0] - vetor x da iteração mais recente (x^(k+1));
+    metriz_x[1] - vetor x da última iteração (x^(k)).
+    '''
     for j in range(iteracoes):
         matriz_x[1] = np.copy(matriz_x[0]) 
         for i in range(n):
@@ -120,21 +140,25 @@ def sorPenta(matriz_BP, vetor_b, matriz_x, n, q, iteracoes, tolerancia = 0, w = 
         if tol <= tolerancia:
             break
 
-def algoritmoPenta(n, q, tol = 0, w = 0):
+def algoritmoPenta(n, q = 3, tol = 0, w = 0):
+    '''
+    Algoritmo responsável por coordenar a execução do método SOR para matriz pentadiagonal. 
+    Imprime o vetor solução no terminal e o tempo gasto na execução do método SOR.
+    '''
     matriz_x = np.zeros((2,n))
     matriz_BP, vetor_b, matriz_x[0] = iniciaSistemaPentadiagonal(n, q)
     
-    if w == 0:
-        sorPenta(matriz_BP,vetor_b, matriz_x, n, q, k)   #k iterações com w = 1
+    if w == 0:      #Se w não foi especificado calcula w ótimo, executando o "algoritmo 01"
+        sorPenta(matriz_BP,vetor_b, matriz_x, n, q, K)
         e_k = max(abs((matriz_x[0]-matriz_x[1])))
 
-        sorPenta(matriz_BP,vetor_b, matriz_x, n, q, p)   #p iterações com w = 1
+        sorPenta(matriz_BP,vetor_b, matriz_x, n, q, P)
         e_kp = max(abs((matriz_x[0]-matriz_x[1])))
 
-        w = 2/(1+math.sqrt(1-((e_kp/e_k)**(1/p))))
+        w = 2/(1+math.sqrt(1-((e_kp/e_k)**(1/P))))
 
     tempo_inicial = time.time()
-    sorPenta(matriz_BP, vetor_b, matriz_x, n, q, k, tol, w) 
+    sorPenta(matriz_BP, vetor_b, matriz_x, n, q, K, tol, w) 
     tempo_final = time.time()
 
     print(matriz_x[0])
@@ -142,6 +166,10 @@ def algoritmoPenta(n, q, tol = 0, w = 0):
     print("w = ", w)
 
 def resolve(n, q):
+    '''
+    Inicia a matriz A e os vetores b e x do sistema pentadiagonal.
+    Imprime no terminal o vetor solução e o tempo gasto na execução da função linalg.solve.
+    '''
     matriz_A = matrizA(n, q)
     vetor_b = matriz_A.sum(axis = 1)
     vetor_x = np.zeros((n))
@@ -154,22 +182,18 @@ def resolve(n, q):
     print("Algoritmo de resolução da biblioteca 'linalg': ","%.4f" % ((tempo_final - tempo_inicial)*10**3), "ms") 
 
 def main():
-    n = 10
-    
-#Tridiagonal
-    #algoritmoThomas(n)
+    n = 10      #Ordem do sistema
 
-    # algoritmoTri(n)
-    # algoritmoTri(n, tol = TOL1)
-    # algoritmoTri(n, tol = TOL1, w = 1.1)
+#-------------------------------- Matriz Tridiagonal --------------------------------#
 
-#Pentadiagonal
-    #q = 5
-    
-    #resolve(n, q)
+    # algoritmoThomas(n)                            #Algoritmo de Thomas
 
-    # algoritmoPenta(n, q)
-    # algoritmoPenta(n, q, tol = TOL1)
-    # algoritmoPenta(n, q, tol = TOL1, w = 1.1)
+    # algoritmoTri(n, tol = TOL1, w = 1.1)          #SOR
+
+#------------------------------- Matriz Pentadiagonal -------------------------------#
+
+    # resolve(n, q = 5)                                 #linalg.solve
+
+    # algoritmoPenta(n, q = 5, tol = TOL1, w = 1.1)     #SOR
 
 main()

@@ -24,7 +24,8 @@ Determinada a ordem do sistema, é possivel que a matriz dos coeficientes seja t
 
 Para executar as funções, basta descomentá-las na main e preencher os parâmetros com os valores desejados.
 
-**algoritmoThomas(n)** *Algoritmo de Thomas*
+**Algoritmo de Thomas**
+`algoritmoThomas(n)` 
 >parâmetros: 
     - n - Ordem do sistema 
 
@@ -32,22 +33,22 @@ Para executar as funções, basta descomentá-las na main e preencher os parâme
 >parâmetros: 
 - n - Ordem do sistema 
 - tol - Tolerância usada como critério de parada *(opcional)*
-    Padrão: tol = 0
 - w - Fator de relaxação *(opcional)*
-    Padrão: w = 0
 
 **resolve(n, q = 5)**    *Solução obtida pela função linalg.solve*
->parâmetros: 
-- n - Ordem do sistema      
-- q - Distância entra as diagonais principal e flutuante *(opcional)*
-    Padrão: q = 3                     
+- parâmetros: 
+    - n - Ordem do sistema      
+    - q - Distância entra as diagonais principal e flutuante *(opcional)*             
 
-**algoritmoPenta(n, q = 5, tol = TOL1, w = 1.1)** *SOR para matriz Pentadiagonal*
->parâmetros
->    n - Ordem do sistema 
->    q - Distância entra as diagonais principal e flutuante *(opcional)*
+**SOR para matriz Pentadiagonal**
+```
+algoritmoPenta(n, q, tol, w)
+parâmetros:
+    n - Ordem do sistema 
+    q - Distância entra as diagonais principal e flutuante (opcional)
         Padrão: q = 3
-    tol - Tolerância usada como critério de parada *(opcional)*
+    tol - Tolerância usada como critério de parada (opcional)
         Padrão: tol = 0
-    w - Fator de relaxação *(opcional)*
+    w - Fator de relaxação (opcional)
         Padrão: w = 0
+```

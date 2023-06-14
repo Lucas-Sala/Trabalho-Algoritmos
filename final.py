@@ -8,7 +8,7 @@ TOL2 = 10**-7
 K = 10      #Número de iterações
 P = 5       #Número de iterações adicionais
 
-np.set_printoptions(precision=4, floatmode = 'fixed')   #Configura precisão de 4 dígitos decimais na impressão dos vetores e matrizes
+np.set_printoptions(precision = 4, floatmode = 'fixed')   #Configura precisão de 4 dígitos decimais na impressão dos vetores e matrizes
 
 def iniciaSistemaTridiagonal(n):
     '''Inicia e retorna a matriz com as diagonais não nulas da matriz A (matriz BT), vetor b e vetor x (iniciado com os mesmos valores do vetor b).'''

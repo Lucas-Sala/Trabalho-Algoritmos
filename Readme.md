@@ -9,19 +9,13 @@ P = 5       #Número de iterações adicionais
 
 np.set_printoptions(precision=4, floatmode = 'fixed')  #Configura precisão de 4 dígitos na impressão dos vetores e matrizes
 ``` 
-## Determine a ordem do sistema
-
-Na função main, a variável n dita a ordem do sistema, altere-o para o valor desejado. 
- 
-`n = 10`
-
 ## As funções
 
-Determinada a ordem do sistema, é possivel que a matriz dos coeficientes seja tridiagonal ou pentadiagonal. Para o primeiro caso, as funções `algoritmoThomas` e `sorTri` solucionam o sistema. Para matriz pentadiagonal, a solução é obtida através das funções `resolve` e `sorPenta`.
+É possivel que a matriz dos coeficientes seja tridiagonal ou pentadiagonal. Para o primeiro caso, as funções `algoritmoThomas` e `sorTri` solucionam o sistema. Para matriz pentadiagonal, a solução é obtida através das funções `resolve` e `sorPenta`.
 
 ## Executando as funções
 
-Para executar as funções, basta descomentá-las na main e preencher os parâmetros com os valores desejados, obedecendo algumas restrições.
+Para executar as funções, basta descomentá-las (retirar o caractere #) na main e preencher os parâmetros com os valores desejados, obedecendo algumas restrições.
 
 >tol = TOL1 ou tol = TOL2
 
@@ -73,3 +67,25 @@ parâmetros:
     w - Fator de relaxação (opcional)
         Padrão: w = 0
 ```
+
+## Exemplos de chamadas (execuções)
+
+```Python
+#-------------------------------- Matriz Tridiagonal --------------------------------#
+    algoritmoThomas(10)                             #Algoritmo de Thomas
+
+    algoritmoTri(n = 10)                            #SOR
+    algoritmoTri(n = 10, tol = TOL1)
+    algoritmoTri(n = 10, w = 1.1)   
+    algoritmoTri(n = 10, tol = TOL1, w = 1.1)     
+
+#------------------------------- Matriz Pentadiagonal -------------------------------#
+    resolve(n = 10, q = 5)                                 #linalg.solve
+
+    algoritmoPenta(n = 10, q = 5)                           #SOR
+    algoritmoPenta(n = 10, q = 5, tol = TOL1)      
+    algoritmoPenta(n = 10, q = 5, w = 1.1)
+    algoritmoPenta(n = 10, q = 5, tol = TOL1, w = 1.1)
+```
+
+Observe que é possível fazer chamada das funções `algoritmoTri` e `algoritmo` sem passar os parâmetros *tol* e *w*. Caso o parâmetro *tol* não seja passado, o método SOR executará K iterações. Se *w* não for especificado, um valor ótimo para *w* será calculado.

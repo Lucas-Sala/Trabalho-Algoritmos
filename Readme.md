@@ -24,7 +24,9 @@ Determinada a ordem do sistema, é possivel que a matriz dos coeficientes seja t
 Para executar as funções, basta descomentá-las na main e preencher os parâmetros com os valores desejados, obedecendo algumas restrições.
 
 >tol = TOL1 ou tol = TOL2
+
 >0 < w < 1 (sub-relaxação) 1 < w < 2 (sobre-relaxação)
+
 >3 < q <= n
 
 

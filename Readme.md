@@ -25,7 +25,7 @@ Para executar as funções, basta descomentá-las na main e preencher os parâme
 
 >tol = TOL1 ou tol = TOL2
 
->0 < w < 1 (sub-relaxação) 1 < w < 2 (sobre-relaxação)
+>0 < w < 1 (sub-relaxação) ou 1 < w < 2 (sobre-relaxação)
 
 >3 < q <= n
 

@@ -23,6 +23,8 @@ Para executar as funções, basta descomentá-las (retirar o caractere #) na mai
 
 >3 < q <= n
 
+As funções imprimem o tempo gasto na execução do método (em milissegundos) e retornam o vetor solução (nos casos em que sua determinação é possível). Para exibí-lo no terminal, basta incluir a chamada da função dentro da função print. Ex: `print(algoritmoTri(7,TOL1,1.2))`
+
 
 **Algoritmo de Thomas**
 
@@ -58,7 +60,7 @@ parâmetros:
 parâmetros:
     n     Ordem do sistema 
     q     Distância entre a diagonal principal e diagonal flutuante
-    tol   Tolerância usada como critério de parada 'opcional'
+    tol   Tolerância usada como critério de parada
     w     Fator de relaxação 'opcional'
 ```
 
@@ -68,18 +70,16 @@ parâmetros:
 #-------------------------------- Matriz Tridiagonal --------------------------------#
     algoritmoThomas(10)                             #Algoritmo de Thomas
 
-    algoritmoTri(n = 10)                            #SOR
-    algoritmoTri(n = 10, tol = TOL1)
-    algoritmoTri(n = 10, w = 1.1)   
-    algoritmoTri(n = 10, tol = TOL1, w = 1.1)     
+    algoritmoTri(n = 10, tol = TOL1)                #SOR
+    algoritmoTri(n = 10, tol = TOL1, w = 1.1)    
+    print(algoritmoTri(n = 10, tol = TOL2)) 
 
 #------------------------------- Matriz Pentadiagonal -------------------------------#
     resolve(n = 10, q = 5)                                 #linalg.solve
-
-    algoritmoPenta(n = 10, q = 5)                           #SOR
-    algoritmoPenta(n = 10, q = 5, tol = TOL1)      
-    algoritmoPenta(n = 10, q = 5, w = 1.1)
+              
+    algoritmoPenta(n = 10, q = 5, tol = TOL1)              #SOR
     algoritmoPenta(n = 10, q = 5, tol = TOL1, w = 1.1)
+    print(algoritmoPenta(n = 10, q = 5, tol = TOL2))
 ```
 
-Observe que é possível fazer chamada das funções `algoritmoTri` e `algoritmo` sem passar os parâmetros *tol* e *w*. Caso o parâmetro *tol* não seja passado, o método SOR executará K iterações. Se *w* não for especificado, um valor ótimo para *w* será calculado.
+Observe que é possível fazer chamada das funções `algoritmoTri` e `algoritmoPenta` sem passar o parâmetro *w*. Caso o parâmetro *w* não for especificado, um valor ótimo para *w* será calculado.

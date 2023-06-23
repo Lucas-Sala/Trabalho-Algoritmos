@@ -13,19 +13,6 @@ np.set_printoptions(precision = 4, floatmode = 'fixed')  #Configura precisão de
 
 É possivel que a matriz dos coeficientes seja tridiagonal ou pentadiagonal. Para o primeiro caso, as funções `algoritmoThomas` e `sorTri` solucionam o sistema. Para matriz pentadiagonal, a solução é obtida através das funções `resolve` e `sorPenta`.
 
-## Executando as funções
-
-Para executar as funções, basta descomentá-las (retirar o caractere #) na main e preencher os parâmetros com os valores desejados, obedecendo algumas restrições.
-
->tol = TOL1 ou tol = TOL2
-
->0 < w < 1 (sub-relaxação) ou 1 < w < 2 (sobre-relaxação)
-
->3 < q <= n
-
-As funções imprimem o tempo gasto na execução do método (em milissegundos) e retornam o vetor solução (nos casos em que sua determinação é possível). Para exibí-lo no terminal, basta incluir a chamada da função dentro da função print. Ex: `print(algoritmoTri(7,TOL1,1.2))`
-
-
 **Algoritmo de Thomas**
 
 `algoritmoThomas(n)` 
@@ -40,7 +27,7 @@ parâmetros:
 ```Python
 parâmetros: 
     n     Ordem do sistema
-    tol   Tolerância usada como critério de parada 'opcional'
+    tol   Tolerância usada como critério de parada
     w     Fator de relaxação 'opcional'
 ```
 
@@ -63,6 +50,18 @@ parâmetros:
     tol   Tolerância usada como critério de parada
     w     Fator de relaxação 'opcional'
 ```
+
+## Executando as funções
+
+Para executar as funções, basta descomentá-las (retirar o caractere #) na main e preencher os parâmetros com os valores desejados, obedecendo algumas restrições.
+
+>tol = TOL1 ou tol = TOL2
+
+>0 < w < 1 (sub-relaxação) ou 1 < w < 2 (sobre-relaxação)
+
+>3 < q <= n
+
+As funções imprimem o tempo gasto na execução do método (em milissegundos) e retornam o vetor solução (nos casos em que sua determinação é possível). Para exibí-lo no terminal, basta incluir a chamada da função dentro da função print. Ex: `print(algoritmoTri(7,TOL1,1.2))`
 
 ## Exemplos de chamadas (execuções)
 

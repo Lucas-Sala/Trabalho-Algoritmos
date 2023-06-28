@@ -28,7 +28,7 @@
         tol   Tolerância usada como critério de parada
         w     Fator de relaxação 'opcional'
 
-    SOLUÇÃO OBTIDA PALA FUNÇÃO linalg.solve
+    SOLUÇÃO OBTIDA PELA FUNÇÃO linalg.solve
 
     resolve(n, q)
     parâmetros: 
